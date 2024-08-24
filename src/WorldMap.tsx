@@ -5,14 +5,9 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { initializeMap } from "./utils/gameUtils"; // Import game initialization logic
+import CountryPrompt from "./CountryPrompt";
 
 am4core.useTheme(am4themes_animated);
-
-// Define a Child Component to receive props
-const CountryPrompt: React.FC<{ countryToGuess: string | null; roundNumber: number }> = ({
-  countryToGuess,
-  roundNumber,
-}) => <h2>Round {roundNumber}: Find {countryToGuess}</h2>;
 
 const WorldMap: React.FC = () => {
   const chartRef = useRef<am4maps.MapChart | null>(null);
@@ -38,10 +33,9 @@ const WorldMap: React.FC = () => {
   }, [countryToGuess]);
 
   return (
-    <div>
-      {/* Pass countryToGuess and roundNumber as props to the child component */}
+    <div id="game">
       <CountryPrompt countryToGuess={countryToGuess} roundNumber={roundNumber} />
-      <div id="chartdiv" style={{ width: "100%", height: "100%" }} />
+      <div id="chartdiv" />
     </div>
   );
 };
